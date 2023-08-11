@@ -1,0 +1,22 @@
+{
+    "OCM Dimensions 300":"",
+    "bitmap":"",
+    "Ordinal Maxi Biz (OMB)": "https://ordapi.bestinslot.xyz/v1/get_collection_snapshot/omb-snapshot.json",
+    "Bitcoin Frogs": "https://ordapi.bestinslot.xyz/v1/get_collection_snapshot/bitcoin-frogs-snapshot.json",
+    "Oblivion by Nullish": "https://ordapi.bestinslot.xyz/v1/get_collection_snapshot/oblivion-snapshot.json",
+    "BTC DeGods":"https://ordapi.bestinslot.xyz/v1/get_collection_snapshot/degods-snapshot.json",
+    "Recursive Frogs":"https://ordapi.bestinslot.xyz/v1/get_collection_snapshot/recursivefrogs-snapshot.json",
+    "The Final Pattern by Nullish":"https://ordapi.bestinslot.xyz/v1/get_collection_snapshot/thefinalpattern-snapshot.json",
+    "Distortion by Nullish":"https://ordapi.bestinslot.xyz/v1/get_collection_snapshot/distortion-snapshot.json",
+    "Seize CTRL":"https://ordapi.bestinslot.xyz/v1/get_collection_snapshot/seize-ctrl-snapshot.json",
+    "Recursive Punks":"https://ordapi.bestinslot.xyz/v1/get_collection_snapshot/recursivepunks-snapshot.json",
+    "Bitcoin Bandits":"https://ordapi.bestinslot.xyz/v1/get_collection_snapshot/bitcoin-bandits-snapshot.json",
+    "Bitcoin Bees":"https://ordapi.bestinslot.xyz/v1/get_collection_snapshot/bitcoin-bees-snapshot.json",
+    "Bitcoin Whales":"https://ordapi.bestinslot.xyz/v1/get_collection_snapshot/bitcoinwhales-snapshot.json",
+    "Bitcoin Bear Cubs":"https://ordapi.bestinslot.xyz/v1/get_collection_snapshot/bbc-snapshot.json",
+    "BTC Machines":"https://ordapi.bestinslot.xyz/v1/get_collection_snapshot/btc-machines-snapshot.json",
+    "Ordillas": "https://ordapi.bestinslot.xyz/v1/get_collection_snapshot/ordillas-snapshot.json",
+    "Titan Meka":"https://ordapi.bestinslot.xyz/v1/get_collection_snapshot/titan_meka-snapshot.json",
+    "Pizza Artifacts":"https://ordapi.bestinslot.xyz/v1/get_collection_snapshot/pizza_artifacts-snapshot.json",
+    "BitZoo Ordinals":"https://ordapi.bestinslot.xyz/v1/get_collection_snapshot/biz-snapshot.json"
+}
