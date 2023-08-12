@@ -1,14 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import axios from 'axios';
 import { I_WALLET_WHITE_LIST } from 'src/interface/airdrop';
-import { hex2string, sequential } from '../utils/index';
+import { hex2string } from '../utils/index';
+import { RPCNodeClient } from '../utils/rpc_node_client';
 
 @Injectable()
 export class AirdropService {
   private rpcNodeClient: RPCNodeClient;
   constructor() {
     this.rpcNodeClient = new RPCNodeClient(
-      'http://bde_team:nfg_9527@192.168.8.4:8332',
+      // 'http://bde_team:nfg_9527@192.168.8.4:8332',
+      'https://btc.getblock.io/05e9e38d-2d3a-4cfd-947a-4de92c461e6a/mainnet/',
     );
   }
   // # 白名单版本（因为白名单不全暂时废弃）
@@ -42,7 +43,12 @@ export class AirdropService {
   }
 
   async getAirdropInfobyRPCNode(txid: string) {
-    const res = await this.rpcNodeClient.entryByTxid(txid);
+    let res;
+    try {
+      res = await this.rpcNodeClient.entryByTxid(txid);
+    } catch (err) {
+      return err;
+    }
     if (res?.result?.asm) {
       const asm: string = res.result.asm;
       const asm_list = asm.split(' ');
@@ -64,7 +70,11 @@ export class AirdropService {
           });
 
         if (mime_type.startsWith('text/plain')) {
-          res_content = content;
+          const charset = mime_type
+            ?.split(';')
+            ?.filter((e) => e.startsWith('charset='))[0]
+            ?.split(';')[1] as BufferEncoding | undefined;
+          res_content = hex2string(content, charset);
         } else {
           res_content = base_header + btoa(hex2string(content));
         }
@@ -81,51 +91,5 @@ export class AirdropService {
     return {
       err: 'not found',
     };
-  }
-}
-
-class RPCNodeClient {
-  private baseUrl: string;
-  static RPCPostParams = { jsonrpc: '1.0', id: '1' };
-  constructor(baseUrl: string) {
-    this.baseUrl = baseUrl;
-  }
-  async run_ajax(method: string, params: any[]) {
-    console.log('rpc method :', method);
-    const _params = {
-      ...RPCNodeClient.RPCPostParams,
-      method,
-      params,
-    };
-    console.log('rpc params :', _params);
-    console.log('-------------------');
-    return axios.post(this.baseUrl, _params).then((res) => {
-      return res.data;
-    });
-  }
-  async entryByTxid(txid: string) {
-    return sequential(
-      this,
-      [this.getrawtransaction, this.decoderawtransaction, this.decodescript],
-      txid,
-    );
-  }
-
-  async getrawtransaction(txid: string) {
-    return this.run_ajax('getrawtransaction', [txid]);
-  }
-  async decoderawtransaction({ result }) {
-    if (!result) {
-      return Promise.reject('result is empyt');
-    }
-    return this.run_ajax('decoderawtransaction', [result]);
-  }
-  async decodescript(res: any) {
-    if (res.err) {
-      return Promise.reject(res.err);
-    }
-    const { result } = res;
-    const txinwitness = result?.vin[0]?.txinwitness[1];
-    return this.run_ajax('decodescript', [txinwitness]);
   }
 }

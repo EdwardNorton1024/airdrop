@@ -1,12 +1,6 @@
-export function hex2string(hex) {
-  const arr = hex.split('');
-  let out = '';
-  for (let i = 0; i < arr.length / 2; i++) {
-    const tmp = '0x' + arr[i * 2] + arr[i * 2 + 1];
-    const charValue = String.fromCharCode(tmp as any);
-    out += charValue;
-  }
-  return out;
+export function hex2string(hex: string, charset: BufferEncoding = undefined) {
+  if (!hex.startsWith('0x')) hex = '0x' + hex;
+  return Buffer.from(hex.toString().slice(2), 'hex').toString(charset);
 }
 
 export function sequential(
